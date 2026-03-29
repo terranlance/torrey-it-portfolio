@@ -1,63 +1,48 @@
-# Tier 3 Network Upgrade
+## Key Design Decisions
 
-## Overview
-This project documents the transition from a flat network architecture to a structured Tier 3 design to improve resiliency, scalability, and manageability.
+### Dual Core Architecture
+Two core switches were implemented to eliminate single points of failure and enable load distribution across the network.
+
+### Firewall High Availability
+A high-availability firewall pair was deployed with redundant uplinks to both core switches to ensure continuity during failover events.
+
+### VLAN Segmentation
+Traffic was segmented into logical networks to improve security and manageability:
+- Management
+- Servers
+- Workstations
+- Wireless
+- Guest
+
+### High-Speed Backbone
+10Gb and 25Gb links were introduced to support:
+- East-west traffic
+- Storage workloads
+- Future infrastructure scaling
 
 ---
 
-## Objectives
-- Eliminate flat network bottlenecks
-- Introduce core/distribution/access segmentation
-- Improve redundancy and failover capability
-- Prepare infrastructure for future growth (10/25Gb backbone)
+## Challenges & Considerations
+
+- Migrating from a flat network without service disruption
+- Maintaining VLAN consistency across switching infrastructure
+- Preventing asymmetric routing conditions
+- Supporting legacy devices with mixed VLAN dependencies
 
 ---
 
-## Architecture Summary
+## Lessons Learned
 
-- Dual core aggregation switches
-- Redundant firewall uplinks (HA pair)
-- Segmented VLAN design
-- High-speed backbone (10Gb / 25Gb)
+- Proper labeling and documentation significantly reduce migration risk
+- Failover scenarios should be tested early in the process
+- Simplicity in VLAN design improves long-term maintainability
+- Routing and DHCP paths must be validated at each phase of deployment
 
 ---
 
-## High-Level Topology
+## Future Improvements
 
-```mermaid
-graph TD
-
-    ISP1["ISP - UP.net"]
-    ISP2["ISP - Spectrum"]
-
-    FW1["Firewall HA - Primary"]
-    FW2["Firewall HA - Secondary"]
-
-    CORE1["Core Switch 1"]
-    CORE2["Core Switch 2"]
-
-    ACCESS1["Access Switch Stack A"]
-    ACCESS2["Access Switch Stack B"]
-
-    SERVERS["VMware Hosts / SAN"]
-    WLAN["Wireless Infrastructure"]
-
-    ISP1 --> FW1
-    ISP2 --> FW1
-
-    FW1 --> CORE1
-    FW1 --> CORE2
-
-    FW2 --> CORE1
-    FW2 --> CORE2
-
-    CORE1 --> CORE2
-
-    CORE1 --> ACCESS1
-    CORE2 --> ACCESS2
-
-    CORE1 --> SERVERS
-    CORE2 --> SERVERS
-
-    CORE1 --> WLAN
-    CORE2 --> WLAN
+- Implement a dedicated management VLAN with restricted access
+- Deploy 802.1X for network access control
+- Further segment medical and IoT devices
+- Enhance monitoring and telemetry visibility
