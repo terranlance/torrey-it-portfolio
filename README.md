@@ -21,7 +21,7 @@ Redesign of a flat network into a structured Tier 3 architecture.
 - Redundant firewall uplinks
 - VLAN segmentation strategy
 
-➡️ *Project details coming soon*
+[View Project](./projects/tier3-network-upgrade)
 
 ---
 
