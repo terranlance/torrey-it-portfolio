@@ -1,26 +1,28 @@
+```mermaid
+
 flowchart LR
 
 %% =========================
 %% ZONES
 %% =========================
 
-subgraph PROD["🏥 Production Network"]
+subgraph PROD["Production Network"]
     HospitalCore["Hospital Core"]
     HospitalFW["Hospital Firewall"]
 end
 
-subgraph ANALYSIS["🔍 Analysis Zone"]
+subgraph ANALYSIS["Analysis Zone"]
     SpanPort["SPAN / Mirror Port"]
     Janice["Janice\nTraffic Analyzer"]
 end
 
-subgraph LAB["🧪 Compute & Storage Environment"]
+subgraph LAB["Compute & Storage Environment"]
     SocFW["SOC Firewall"]
     ComputeStorage["Compute and Storage"]
     GUPPI["GUPPI\nAI / LLM Workloads"]
 end
 
-subgraph INTERNET["🌐 Internet"]
+subgraph INTERNET["Internet"]
     ISP["ISP"]
 end
 
