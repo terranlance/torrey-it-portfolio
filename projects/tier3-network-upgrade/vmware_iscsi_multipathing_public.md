@@ -148,3 +148,35 @@ Expected:
 
 ## Conclusion
 All hosts are fully connected to the SAN fabric, load-balanced, and operating with optimized multipathing.
+
+
+## Host Server | iSCSI Network
+
+```mermaid
+flowchart LR
+
+%% Hosts (compute style)
+ESXA([ESX-A])
+ESXB([ESX-B])
+ESXC([ESX-C])
+
+%% Core Switches (network style)
+CORE01[[CORE01]]
+CORE02[[CORE02]]
+
+%% Connections (25 GB/s)
+ESXA -- "25 GB/s" --> CORE01
+ESXA -- "25 GB/s" --> CORE02
+
+ESXB -- "25 GB/s" --> CORE01
+ESXB -- "25 GB/s" --> CORE02
+
+ESXC -- "25 GB/s" --> CORE01
+ESXC -- "25 GB/s" --> CORE02
+
+%% Styling
+classDef host fill:#1f2937,stroke:#60a5fa,color:#ffffff,stroke-width:2px
+classDef core fill:#065f46,stroke:#34d399,color:#ffffff,stroke-width:2px
+
+class ESXA,ESXB,ESXC host
+class CORE01,CORE02 core
