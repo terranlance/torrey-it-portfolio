@@ -1,0 +1,55 @@
+flowchart TB
+    %% SAN %%
+    subgraph SAN["SAN1"]
+        direction TB
+
+        subgraph CTA["Controller A"]
+            direction LR
+            A1["A1"]
+            A2["A2"]
+            A3["A3"]
+            A4["A4"]
+        end
+
+        subgraph CTB["Controller B"]
+            direction LR
+            B1["B1"]
+            B2["B2"]
+            B3["B3"]
+            B4["B4"]
+        end
+    end
+
+    %% Core Switches %%
+    CORE01["🟦 CORE01\nPorts 4-8"]
+    CORE02["🟩 CORE02\nPorts 4-8"]
+
+    %% Balanced Connections %%
+    A1 --> CORE01
+    A2 --> CORE02
+    A3 --> CORE01
+    A4 --> CORE02
+
+    B1 --> CORE01
+    B2 --> CORE02
+    B3 --> CORE01
+    B4 --> CORE02
+
+    %% Styling %%
+    style CORE01 fill:#1f4fff,stroke:#000,stroke-width:2px,color:#fff
+    style CORE02 fill:#16a34a,stroke:#000,stroke-width:2px,color:#fff
+
+    style SAN fill:#111827,stroke:#999,stroke-width:2px,color:#fff
+
+    style CTA fill:#1e3a8a,stroke:#60a5fa,color:#fff
+    style CTB fill:#14532d,stroke:#4ade80,color:#fff
+
+    style A1 fill:#60a5fa,color:#000
+    style A2 fill:#60a5fa,color:#000
+    style A3 fill:#60a5fa,color:#000
+    style A4 fill:#60a5fa,color:#000
+
+    style B1 fill:#4ade80,color:#000
+    style B2 fill:#4ade80,color:#000
+    style B3 fill:#4ade80,color:#000
+    style B4 fill:#4ade80,color:#000
